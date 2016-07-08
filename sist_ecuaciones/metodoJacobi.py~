@@ -1,0 +1,74 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+# Creado por Jean Pierre Pacheco Avila
+
+from numpy import *
+from random import randint
+import sys
+
+
+iteraciones = 100
+epsilon = 0.00000001
+
+# Metodo que implementa el metodo de Jacobi
+# A matriz de nxn
+# b vector del sistema Ax = b
+# X aproximacion inicial
+
+def hazJacobi(A,b,X):
+	x_anterior = X
+	n = size(A[0])
+	x_nueva = zeros([n])
+	num = 0
+	while(num < iteraciones):
+		for i  in range(0,n):
+			suma = 0
+			for j in range(0,n):
+				if(j != i):
+					suma += A[i][j]*x_anterior[j]
+
+			x_nueva[i] = (1./A[i][i])*(b[i] - suma)
+
+		if(linalg.norm(x_nueva - x_anterior,inf)/(linalg.norm(x_nueva,inf)) < epsilon):
+			print "\nSe cumplió la tolerancia en la iteracion: ",num
+			return x_nueva
+		
+		x_anterior = x_nueva.copy()
+		num+=1
+	print "Numero de iteraciones excedidas."
+	return x_nueva
+
+print "\nMETODO DE JACOBI.\n"
+print "Se generará una matriz aleatoria de nxn, al igual que un vector solución aleatorio. \n"
+print "El vector inical para el método también es aleatorio por lo que no se garantiza para nada que la solución dada por esta implementación sea correcta, ya que sabemos que el vector x_inicial debe ser cercano a la solucion real del sistema."
+
+
+n = int(raw_input("Introduce las filas de la matriz cuadrada A: "))
+
+matA = zeros([n,n])
+vec = zeros([n])
+
+for f in range(n):
+	for c in range(n):
+		matA[f][c] = randint(2, 9)
+
+x_inicial = zeros([n])
+
+for f in range (n):
+	vec[f] = random.uniform(10, 15)
+	x_inicial[f] = random.uniform(4, 6)
+
+
+
+vecX = hazJacobi(matA,vec,x_inicial)
+
+print "Matriz A: \n",matA
+print "Vector b: ",vec
+print "Vector X: ",vecX
+
+x = linalg.solve(matA,vec) 
+print "\nSolucion numpy: ",x
+
+

@@ -1,0 +1,32 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Análisis numérico \\ Proyecto final \\ Resolución de la ecuación de Laplace en 2D.}
+\author{Jean Pierre Pacheco Avila}
+
+\begin{document}
+
+\maketitle
+La ecuacion de Laplace es una ecuacion en derivadas parciales y puede ser escrita de la siguiente forma:
+$$ \frac{\partial^{2}u}{\partial^{2}x} + \frac{\partial^{2}u}{\partial^{2}y} = 0 $$ o tambien:
+$$ \bigtriangledown^{2}u = 0$$ donde $ \bigtriangledown^{2} $ es el operador de Laplace o laplaciano.
+
+Para reesolver la ecuación necesitamos encontrar la función $ u(x,y) $ que satisfaga la igualdad. Pero nosotros queremos 
+resolverla de forma numérica, y además en esta ecuación aparecen las segundas derivadas, por lo que se usará el método de 
+diferencias finitas para aproximar la solución. \\
+Dado que nuestro dominio en este caso es un conjunto $ D \subset R^{2} $, y el método de diferencias finitas
+requiere o hace uso de una partición del dominio, en este caso, necesitamos particionar tanto al eje X como al eje Y, por lo que
+la partición de nuestro dominio se verá como un rectangulo cuadriculado. \\
+
+Si la longitud de las particiones en X e Y son $\bigtriangleup x$ y $\bigtriangleup y$ respectivamente, entonces podemos escribir
+la ecuación $$ \frac{\partial^{2}u}{\partial^{2}x} + \frac{\partial^{2}u}{\partial^{2}y} = 0 $$ como sigue, usando la formula
+de diferencias finitas para aproximar la segunda derivada a cada punto $ (x_{j},y_{i}) $ dentro de nuestro dominio obtenemos:
+$$ \frac {u_{i+1,j} - 2u_{i,j} + u_{i-1,j}}{(\bigtriangleup x)^{2}} + \frac {u_{i,j+1} - 2u_{i,j} + u_{i,j-1}}{(\bigtriangleup y)^{2}} = 0$$
+
+Si suponemos que $ \bigtriangleup x = \bigtriangleup y$ entonces obtenemos la siguiente igualdad:
+$$ -4u_{i,j} - u_{i+1,j} + u_{i-1,j}+ u_{i,j+1}+ u_{i,j-1}  = 0$$ 
+Si 
+\section{}
+
+\end{document}
